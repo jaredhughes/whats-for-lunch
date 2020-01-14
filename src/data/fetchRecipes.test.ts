@@ -13,10 +13,9 @@ describe('fetchIngredients', () => {
   it('returns recipes key', async () => {
     const data = {
       recipes: []
-    };
+    }
+    ;(axios.get as any).mockImplementationOnce(() => Promise.resolve({ data }))
 
-    (axios.get as any).mockImplementationOnce(() => Promise.resolve({ data }));
-
-    await expect(fetchRecipes()).resolves.toEqual(data.recipes);
+    await expect(fetchRecipes()).resolves.toEqual(data.recipes)
   })
 })

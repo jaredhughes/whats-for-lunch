@@ -16,7 +16,7 @@ describe('Date', () => {
     })
 
     it('throws on invalid input', () => {
-      expect(() => Date.isBefore("invalid")).toThrowError()
+      expect(() => Date.isBefore('invalid')).toThrowError()
     })
   })
 
@@ -32,7 +32,7 @@ describe('Date', () => {
     })
 
     it('throws on invalid input', () => {
-      expect(() => Date.isAfter("invalid")).toThrowError()
+      expect(() => Date.isAfter('invalid')).toThrowError()
     })
   })
 })

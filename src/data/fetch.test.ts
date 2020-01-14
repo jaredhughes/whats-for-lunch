@@ -14,11 +14,9 @@ describe('fetch', () => {
   it('calls provided endpoint', () => {
     fetch('/my-endpoint')
 
-    expect(mockAxios.get).toHaveBeenCalledWith('/my-endpoint',
-      {
-        "headers": { "Access-Control-Allow-Origin": "*" }
-      }
-    )
+    expect(mockAxios.get).toHaveBeenCalledWith('/my-endpoint', {
+      headers: { 'Access-Control-Allow-Origin': '*' }
+    })
   })
 
   it('returns a promise', () => {

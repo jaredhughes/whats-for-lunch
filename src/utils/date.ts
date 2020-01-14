@@ -11,7 +11,7 @@ export function isBefore(date: string): boolean {
     const diff = +now - +timestamp
     return diff < 0
   } else {
-    throw new Error("Invalid date provided")
+    throw new Error('Invalid date provided')
   }
 }
 
@@ -23,6 +23,6 @@ export function isAfter(date: string): boolean {
     const diff = +now - +timestamp
     return diff >= 0
   } else {
-    throw new Error("Invalid date provided")
+    throw new Error('Invalid date provided')
   }
 }

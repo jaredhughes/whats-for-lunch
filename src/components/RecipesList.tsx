@@ -21,8 +21,7 @@ export const RecipesList: React.FC<Props> = ({ list }) => {
             <h3>{r.title}</h3>
             <IngredientsList ingredients={r.ingredients} />
           </div>
-        )
-        )}
+        ))}
       </>
     )
   }

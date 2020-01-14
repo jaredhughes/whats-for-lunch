@@ -13,5 +13,4 @@ interface Ingredients {
 const ENDPOINT = process.env.REACT_APP_INGREDIENTS_ENDPOINT as string
 
 export const fetchIngredients = (): Promise<Ingredient[]> =>
-  fetch<Ingredients>(ENDPOINT)
-    .then(response => response.data.ingredients)
+  fetch<Ingredients>(ENDPOINT).then(response => response.data.ingredients)

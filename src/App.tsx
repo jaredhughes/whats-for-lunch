@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 import { Recipes } from './components/Recipes'
 
 const App: React.FC = () => {
@@ -10,12 +10,14 @@ const App: React.FC = () => {
       <h1>What's for Lunch?</h1>
 
       {!isVisible ? (
-        <button className="cta-button" onClick={() => setVisible(true)}>Click Here to Find Out</button>
+        <button className="cta-button" onClick={() => setVisible(true)}>
+          Click Here to Find Out
+        </button>
       ) : (
-          <Recipes />
-        )}
+        <Recipes />
+      )}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
