@@ -7,13 +7,18 @@ export interface PossibleLunches {
   questionable: Recipe[]
 }
 
+export type LunchRecipe = Recipe & {
+  ingredients: Ingredient[]
+}
+
 const filterSafe = (ingredients: Ingredient[]) =>
-  ingredients.filter(i => isBefore(i['use-by']))
+  ingredients.filter(i => isBefore(i['best-before']))
 
 const filterQuestionable = (ingredients: Ingredient[]) =>
   ingredients.filter(i => isAfter(i['use-by']) && isBefore(i['best-before']))
 
 const recipesForIngredients = (recipes: Recipe[], ingredients: Ingredient[]): Recipe[] => {
+  if (!ingredients || !ingredients.length) return []
   const ingredientTitles = ingredients.map(i => i.title)
 
   return recipes.filter(r => {

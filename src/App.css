@@ -10,3 +10,74 @@ body {
   min-height: 100vh;
   text-align: center;
 }
+
+.cta-button {
+  background-color: #fff;
+  border-radius: 8px;
+  border: none;
+  color: #282c34;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.9;
+  padding: 12px 20px;
+  text-transform: uppercase;
+}
+
+.cta-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transition: 0.2s all;
+}
+
+h2 {
+  left: 0;
+  margin-top: -20px;
+  position: absolute;
+  transform: rotate(-10deg);
+}
+
+.safeGroup,
+.questionableGroup {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+  position: relative;
+}
+
+.safeGroup {
+  border-bottom: 1px solid #b7b7b7;
+  padding-bottom: 2em;
+}
+
+.safeGroup h2 {
+  color: #347b34;
+}
+
+.questionableGroup h2 {
+  color: red;
+}
+
+.recipe {
+  flex: 0 0 50%;
+  padding-top: 30px;
+}
+
+h3 {
+  margin: 0 0 12px;
+}
+
+h4 {
+  font-size: 17px;
+  font-weight: normal;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+ul, li {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.noResults {
+  width: 100%;
+}

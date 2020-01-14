@@ -8,12 +8,16 @@ export interface Props {
 
 export const RecipesList: React.FC<Props> = ({ list }) => {
   if (!list || !list.length) {
-    return <p>No recipes found.</p>
+    return (
+      <div className="noResults">
+        <p style={{ textAlign: 'center' }}>No recipes found.</p>
+      </div>
+    )
   } else {
     return (
       <>
-        {list.map(r => (
-          <div className="recipe">
+        {list.map((r, k) => (
+          <div className="recipe" key={k}>
             <h3>{r.title}</h3>
             <IngredientsList ingredients={r.ingredients} />
           </div>
