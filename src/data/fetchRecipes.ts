@@ -1,6 +1,6 @@
 import { fetch } from './fetch'
 
-interface Recipe {
+export interface Recipe {
   title: string
   ingredients: string[]
 }

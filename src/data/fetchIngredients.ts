@@ -1,6 +1,6 @@
 import { fetch } from './fetch'
 
-interface Ingredient {
+export interface Ingredient {
   title: string
   'best-before': string
   'use-by': string
