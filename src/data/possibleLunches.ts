@@ -1,40 +1,47 @@
-import { fetchIngredients, Ingredient } from './fetchIngredients'
-import { fetchRecipes, Recipe } from './fetchRecipes'
-import { isBefore, isAfter } from './../utils'
+import { fetchIngredients, Ingredient } from "./fetchIngredients";
+import { fetchRecipes, Recipe } from "./fetchRecipes";
+import { isBefore, isAfter } from "./../utils";
 
 export interface PossibleLunches {
-  safe: Recipe[]
-  questionable: Recipe[]
+  safe: Recipe[];
+  questionable: Recipe[];
 }
 
 export type LunchRecipe = Recipe & {
-  ingredients: Ingredient[]
-}
+  ingredients: Ingredient[];
+};
 
-const filterSafe = (ingredients: Ingredient[]) =>
-  ingredients.filter(i => isBefore(i['best-before']))
+const isSafe = (ingredient: Ingredient | undefined) =>
+  ingredient && isBefore(ingredient["best-before"]);
 
-const filterQuestionable = (ingredients: Ingredient[]) =>
-  ingredients.filter(i => isAfter(i['use-by']) && isBefore(i['best-before']))
+const isQuestionable = (ingredient: Ingredient | undefined) =>
+  ingredient &&
+  isBefore(ingredient["use-by"]) &&
+  isAfter(ingredient["best-before"]);
 
-const recipesForIngredients = (recipes: Recipe[], ingredients: Ingredient[]): Recipe[] => {
-  if (!ingredients || !ingredients.length) return []
-  const ingredientTitles = ingredients.map(i => i.title)
+const ingredientByTitle = (ingredients: Ingredient[], title: string) =>
+  ingredients.find(i => title === i.title);
 
-  return recipes.filter(r => {
-    const matchIngredients = r.ingredients.map(i => ingredientTitles.includes(i))
-    return matchIngredients.length > 0
-  })
-}
+const getBestByRecipes = (recipes: Recipe[], ingredients: Ingredient[]) =>
+  recipes.filter(recipe =>
+    recipe.ingredients.every(title =>
+      isSafe(ingredientByTitle(ingredients, title))
+    )
+  );
+
+const getQuestionableRecipes = (recipes: Recipe[], ingredients: Ingredient[]) =>
+  recipes.filter(recipe =>
+    recipe.ingredients
+      .map(title => isQuestionable(ingredientByTitle(ingredients, title)))
+      .includes(true)
+  );
 
 export async function possibleLunches(): Promise<PossibleLunches> {
-  const ingredients = await fetchIngredients()
-  const safeIngredients = filterSafe(ingredients)
-  const questionableIngredients = filterQuestionable(ingredients)
-  const recipes = await fetchRecipes()
+  const ingredients = await fetchIngredients();
+  const recipes = await fetchRecipes();
 
   return {
-    safe: recipesForIngredients(recipes, safeIngredients),
-    questionable: recipesForIngredients(recipes, questionableIngredients)
-  }
+    safe: getBestByRecipes(recipes, ingredients),
+    questionable: getQuestionableRecipes(recipes, ingredients)
+  };
 }
